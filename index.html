@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <style>
+       
+        .div1{
+            color: blueviolet;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            text-align: center;
+        }
+        
+       label{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="div1">
+    <h1>Invoice Generator</h1></div>
+    <form action="/generate_invoice" method="post">
+        <label  class=class1 for="customer">Customer Name:</label>
+        <input type="text" id="customer" name="customer" required><br><br>
+        
+        <label class=class2 for="numOfItems">Number of Items:</label>
+        <input type="number" id="numOfItems" name="numOfItems" min="1" required><br><br>
+        
+        <div id="items">
+            <!-- JavaScript will dynamically add item fields here -->
+        </div>
+        
+        <button type="submit">Generate Invoice</button>
+    </form>
+
+    <script>
+        document.getElementById('numOfItems').addEventListener('change', function() {
+            let numOfItems = parseInt(this.value);
+            let itemsDiv = document.getElementById('items');
+            itemsDiv.innerHTML = '';
+            for (let i = 1; i <= numOfItems; i++) {
+                itemsDiv.innerHTML += `
+                    <h3>Item ${i}</h3>
+                    <label for="item${i}">Item Name:</label>
+                    <input type="text" id="item${i}" name="item${i}" required><br><br>
+                    
+                    <label for="qty${i}">Quantity:</label>
+                    <input type="number" id="qty${i}" name="qty${i}" min="1" required><br><br>
+                    
+                    <label for="price${i}">Unit Price:</label>
+                    <input type="number" id="price${i}" name="price${i}" step="0.01" min="0" required><br><br>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
