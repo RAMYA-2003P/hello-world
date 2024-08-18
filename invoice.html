@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <p>Date: {{ order.date }}</p>
+    <p>Invoice To: {{ order.customer }}</p>
+    <hr>
+    
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Total</th>
+        </tr>
+        {% for item in order.items %}
+        <tr>
+            <td>{{ item.item }}</td>
+            <td>{{ item.qty }}</td>
+            <td>{{ item.price * item.qty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <hr>
+    <p>Sub Total: {{ total }}</p>
+    <p>Discount @10%: {{ discount }}</p>
+    <p>Net Total: {{ net_total }}</p>
+    <p>CGST @9%: {{ tax }}</p>
+    <p>SGST @9%: {{ tax }}</p>
+    <p>Grand Total: {{ grand_total }}</p>
+    
+    <hr>
+    <a href="/">Generate Another Invoice</a>
+</body>
+</html>
